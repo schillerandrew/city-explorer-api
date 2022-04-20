@@ -19,7 +19,7 @@ An extension of the City Explorer project, which now adds server connections (in
 ## Change Log
 - Name of feature: Display weather data for a city
 - Estimated ETA: 120
-- Start time: 7:15
+- Start time: 7:15-9:00
 - Finish time: 
 - Actual ETA: 
 

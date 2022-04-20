@@ -22,17 +22,19 @@ app.get('/', (request, response) => {
 });
 
 app.get('/sayHello', (request, response) => {
-  console.log(request.query.name);
+  // console.log(request.query.name);
   let name = request.query.name
   let lastName = request.query.lastName;
   response.send(`Hello, ${name} ${lastName}`);
 });
 
-app.get('/weather', (request, response, next) => {
-    let species = request.query.species;
-    let dataToSend = data.find(city => city.lat === species)
-    let selectedPet = new Forecast(dataToSend);
-    response.send(selectedPet);
+app.get('/getCity', (request, response) => {
+    let city = request.query.city_name;
+    // response.send(city);
+    let dataToSend = data.find(weatherData => weatherData.city_name === city);
+    response.send(dataToSend);
+    // let selectedPet = new Forecast(dataToSend);
+    // response.send(selectedPet);
 });
 
 app.get('*', (request, response) => {
@@ -40,12 +42,12 @@ app.get('*', (request, response) => {
 });
 
 // CLASSES
-class Forecast {
-  constructor(weatherObject) {
-    this.data = weatherObject.data;
-    this.desc = weatherObject.desc;
-  }
-}
+// class Forecast {
+//   constructor(weatherObject) {
+//     this.date = weatherObject.date;
+//     this.desc = weatherObject.desc;
+//   }
+// }
 
 // LISTEN
 // start the server
