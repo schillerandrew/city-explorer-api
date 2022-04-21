@@ -7,6 +7,7 @@ require('dotenv').config();
 let data = require('./weather.json');
 
 const cors = require('cors');
+const { default: axios } = require('axios');
 
 // USE
 const app = express();
@@ -28,13 +29,18 @@ app.get('/sayHello', (request, response) => {
   response.send(`Hello, ${name} ${lastName}`);
 });
 
-app.get('/weather', (request, response) => {
+app.get('/weather', async (request, response) => {
   let searchQuery = request.query.searchQuery;
-  let cityWeather = data.find(c => c.city_name === searchQuery);
-  let selectedCity = cityWeather.data.map(cityObj => {
-    return new Forecast(cityObj);
-  });
-  response.send(selectedCity);
+  let city = data.find(c => c.city_name === searchQuery);
+  let cityLat = city.lat.slice(0, -2);
+  let cityLon = city.lon.slice(0, -2);
+  let key = 'f09e3ef3fd634b0d92c8856edbfb37be';
+  let url = `http://api.weatherbit.io/v2.0/forecast/daily?key=${key}&units=I&days=3&lat=${cityLat}&lon=${cityLon}`;
+  console.log(url);
+  let resultsFromAPI = await axios.get(url);
+  console.log(resultsFromAPI.data);
+  // let arrayFromAPI = resultsFromAPI.data.map(forecast => new Forecast(forecast));
+  // response.status(200).send(arrayFromAPI);
 });
 
 app.get('*', (request, response) => {
@@ -44,8 +50,10 @@ app.get('*', (request, response) => {
 // CLASSES
 class Forecast {
   constructor(cityWeather) {
-    this.date = cityWeather.datetime;
-    this.desc = cityWeather.weather.description;
+    this.date = cityWeather.valid_date;
+    this.clouds = cityWeather.clouds;
+    this.highTemp = cityWeather.max_temp;
+    this.lowTemp = cityWeather.min_temp;
   }
 }
 
