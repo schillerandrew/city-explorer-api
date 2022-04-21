@@ -13,7 +13,9 @@ An extension of the City Explorer project, which now adds server connections (in
 
 ![Lab 6 data flow](./img/lab6plan.png)
 
-![Lab 7 wireframe](./img/lab7.jpg)
+![Lab 7 data flow](./img/lab7.jpg)
+
+![lab 8 data flow](./img/lab8plan.jpg)
 
 - ### core languages: HTML/CSS/JavaScript
 
