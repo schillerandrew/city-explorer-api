@@ -34,7 +34,7 @@ app.get('/weather', async (request, response) => {
   let city = data.find(c => c.city_name === searchQuery);
   let cityLat = city.lat.slice(0, -2);
   let cityLon = city.lon.slice(0, -2);
-  let key = 'f09e3ef3fd634b0d92c8856edbfb37be';
+  let key = process.env.WEATHERBIT_API_KEY;
   let url = `http://api.weatherbit.io/v2.0/forecast/daily?key=${key}&units=I&days=3&lat=${cityLat}&lon=${cityLon}`;
   console.log(url);
   let resultsFromAPI = await axios.get(url);
