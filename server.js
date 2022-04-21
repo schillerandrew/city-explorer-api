@@ -28,26 +28,26 @@ app.get('/sayHello', (request, response) => {
   response.send(`Hello, ${name} ${lastName}`);
 });
 
-app.get('/getCity', (request, response) => {
-    let city = request.query.city_name;
-    // response.send(city);
-    let dataToSend = data.find(weatherData => weatherData.city_name === city);
-    response.send(dataToSend);
-    // let selectedPet = new Forecast(dataToSend);
-    // response.send(selectedPet);
+app.get('/weather', (request, response) => {
+  let searchQuery = request.query.searchQuery;
+  let cityWeather = data.find(c => c.city_name === searchQuery);
+  let selectedCity = cityWeather.data.map(cityObj => {
+    return new Forecast(cityObj);
+  });
+  response.send(selectedCity);
 });
 
 app.get('*', (request, response) => {
-  response.send('Not sure what you are a looking for, but it isn\'t here.');
+  response.send('Not sure what you are looking for, but it isn\'t here!');
 });
 
 // CLASSES
-// class Forecast {
-//   constructor(weatherObject) {
-//     this.date = weatherObject.date;
-//     this.desc = weatherObject.desc;
-//   }
-// }
+class Forecast {
+  constructor(cityWeather) {
+    this.date = cityWeather.datetime;
+    this.desc = cityWeather.weather.description;
+  }
+}
 
 // LISTEN
 // start the server

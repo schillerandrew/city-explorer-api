@@ -10,7 +10,10 @@ An extension of the City Explorer project, which now adds server connections (in
 <!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
 
 ## Architecture
-![wireframe](wwrrcc.jpg)
+
+![Lab 6 data flow](./img/lab6plan.png)
+
+![Lab 7 wireframe](./img/lab7.jpg)
 
 - ### core languages: HTML/CSS/JavaScript
 
