@@ -15,7 +15,9 @@ An extension of the City Explorer project, which now adds server connections (in
 
 ![Lab 7 data flow](./img/lab7.jpg)
 
-![lab 8 data flow](./img/lab8plan.jpg)
+![Lab 8 data flow](./img/lab8plan.jpg)
+
+![Lab 9 data flow](./img/lab9plan.jpg)
 
 - ### core languages: HTML/CSS/JavaScript
 
@@ -29,4 +31,7 @@ An extension of the City Explorer project, which now adds server connections (in
 - Actual ETA: 
 
 ## Credit and Collaborations
-Abdulahi contributed to the wireframe
+
+- [Jonathan Rumsey](https://github.com/nojronatron) assisted with the Lab 6 data flow
+- Abdulahi contributed to the Lab 6 data flow
+- Roger Reyes contributed to the Lab 9 data flow
