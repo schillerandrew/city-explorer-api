@@ -22,23 +22,32 @@ app.get('/', (request, response) => {
   response.send('Hello, from our server');
 });
 
-app.get('/sayHello', (request, response) => {
-  // console.log(request.query.name);
-  let name = request.query.name
-  let lastName = request.query.lastName;
-  response.send(`Hello, ${name} ${lastName}`);
-});
-
 app.get('/weather', async (request, response) => {
   let city = request.query.searchQuery;
   // let city = data.find(c => c.city_name === searchQuery);
   // let cityLat = city.lat.slice(0, -2);
   // let cityLon = city.lon.slice(0, -2);
-  let key = process.env.WEATHERBIT_API_KEY;
+  let key = process.env.WEATHER_API_KEY;
   let url = `http://api.weatherbit.io/v2.0/forecast/daily?key=${key}&units=I&days=3&city=${city}`;
   let resultsFromAPI = await axios.get(url);
   let arrayFromAPI = resultsFromAPI.data.data.map(forecast => new Forecast(forecast));
   response.status(200).send(arrayFromAPI);
+});
+
+app.get('/movies', async (request, response, next) => {
+  try {
+    let city = request.query.searchQuery;
+    let key = process.env.MOVIE_API_KEY;
+    // let url = `https://api.themoviedb.org/3/search/movie?api_key=${key}&query=Jack+Reacher`;
+    let url = `https://api.themoviedb.org/3/search/movie?api_key=${key}&query=${city}&include_adult=false`;
+    // let url = `https://api.themoviedb.org/3/search/keyword?api_key=${key}&query=${city}&page=1`;
+    let resultsFromAPI = await axios.get(url);
+    // response.send(resultsFromAPI);
+    let arrayFromAPI = resultsFromAPI.data.results.map(movie => new Movie(movie));
+    response.send(arrayFromAPI);
+  } catch (error) {
+    next(error);
+  }
 });
 
 app.get('*', (request, response) => {
@@ -54,6 +63,24 @@ class Forecast {
     this.lowTemp = cityWeather.min_temp;
   }
 }
+
+class Movie {
+  constructor(movie) {
+    this.title = movie.title;
+    this.overview = movie.overview;
+    this.avgVotes = movie.vote_average;
+    this.totalVotes = movie.vote_count;
+    this.image = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
+    this.popularity = movie.popularity;
+    this.releaseDate = movie.release_date
+  }
+}
+
+//// ERRORS
+app.use((error, request, response, next) => {
+  console.log(error.message);
+  response.status(500).send(error.message);
+});
 
 //// LISTEN
 //// start the server
