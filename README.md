@@ -19,6 +19,8 @@ An extension of the City Explorer project, which now adds server connections (in
 
 ![Lab 9 data flow](./img/lab9plan.jpg)
 
+![Lab 10 data flow](./img/lab10plan.jpg)
+
 - ### core languages: HTML/CSS/JavaScript
 
 - ### library: [React Bootstrap](https://react-bootstrap.github.io/getting-started/introduction)
