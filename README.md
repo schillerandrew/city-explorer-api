@@ -35,5 +35,6 @@ An extension of the City Explorer project, which now adds server connections (in
 ## Credit and Collaborations
 
 - [Jonathan Rumsey](https://github.com/nojronatron) assisted with the Lab 6 data flow
-- Abdulahi contributed to the Lab 6 data flow
+- Abdulahi contributed to the Lab 7 data flow
 - Roger Reyes contributed to the Lab 9 data flow
+- Jason Wilson contributed to the Lab 10 data flow
